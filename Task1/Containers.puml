@@ -5,7 +5,7 @@
 Person(client, "Сотрудник")
 
 Container(oldDwh, "DWH", "MS SQL Server 2008")
-Container(dataLakehouse, "Data Lakehouse", "S3, Iceberg, Nessie, Dremio, Airflow")
+Container(dataLakehouse, "Data Lakehouse", "S3, Iceberg, Nessie, Dremio")
 Container(powerBi, "Портал самообслуживания", "Power BI")
 Container(financeServices, "Финтех-сервисы", "Java, Golang")
 Container(aiServices, "ИИ-сервисы", "Python")
