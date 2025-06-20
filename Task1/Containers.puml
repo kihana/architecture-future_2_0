@@ -1,0 +1,25 @@
+@startuml C4_ContextFuture2.0
+
+!include  https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(client, "Сотрудник")
+
+Container(oldDwh, "DWH", "MS SQL Server 2008")
+Container(dataLakehouse, "Data Lakehouse", "S3, Iceberg, Nessie, Dremio, Airflow")
+Container(powerBi, "Портал самообслуживания", "Power BI")
+Container(financeServices, "Финтех-сервисы", "Java, Golang")
+Container(aiServices, "ИИ-сервисы", "Python")
+ContainerQueue(airflow, "ETL/ELT", "Airflow")
+ContainerQueue(kafka, "Message Queue", "Kafka")
+
+Rel(client, powerBi, "Сформировать отчет")
+Rel(dataLakehouse, powerBi, "Загрузка данных", "SQL API")
+Rel(dataLakehouse, aiServices, "Загрузка данных", "SQL API")
+Rel(dataLakehouse, financeServices, "Загрузка данных", "SQL API")
+Rel(oldDwh, airflow, "Чтение данных")
+Rel(kafka, airflow, "Чтение данных")
+Rel(airflow, dataLakehouse, "Запись данных")
+Rel(financeServices, kafka, "Запись данных")
+Rel(aiServices, kafka, "Запись данных")
+
+@enduml
